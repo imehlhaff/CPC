@@ -59,11 +59,18 @@ hierarchical clustering via \code{\link{hclust}()}. \code{"kmeans"}
 performs k-means clustering via \code{\link{kmeans}()}. \code{"pam"}
 performs k-medoids clustering via \code{\link{pam}()}. \code{"manual"}
 indicates that no clustering is necessary and that the researcher has specified
-cluster assignments. In this case, \code{data} must contain a vector identifying
-cluster membership for each observation, and \code{cols} and \code{clusters} must
-be defined. For clustering methods, additional arguments to fine-tune clustering
+cluster assignments.
+
+For all clustering methods, additional arguments to fine-tune clustering
 performance, such as the specific algorithm to be used, should be passed to
-\code{CPC()} and will be inherited by the specified clustering function.
+\code{CPC()} and will be inherited by the specified clustering function. In
+particular, if \code{type = "kmeans"}, using a large number of random starts is
+recommended. This can be specified with the \code{nstart} argument to
+\code{\link{kmeans}()}, passed directly to \code{CPC()}.
+
+If \code{type = "manual"}, \code{data} must contain a vector identifying cluster
+membership for each observation, and \code{cols} and \code{clusters} must be
+defined.
 }
 \examples{
 data <- matrix(c(rnorm(50, 0, 1), rnorm(50, 5, 1)), ncol = 2, byrow = TRUE)

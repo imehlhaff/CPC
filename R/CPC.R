@@ -62,7 +62,7 @@
 
 CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
                 clusters = NULL, ...) {
-  input <- as.data.frame(na.omit(data))
+  input <- as.matrix(na.omit(data))
   cluster <- NULL
 
   if(length(unique(input)) < k){

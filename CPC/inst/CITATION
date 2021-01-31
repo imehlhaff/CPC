@@ -1,0 +1,16 @@
+citHeader("To cite CPC in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "Measuring Political Polarization: The Cluster-Polarization Coefficient",
+  author   = "Isaac D. Mehlhaff",
+  journal  = "working paper",
+  year     = "2021",
+  volume   = NA,
+  number   = NA,
+  pages    = NA,
+  url      = NA,
+  textVersion = paste(
+
+  )
+)

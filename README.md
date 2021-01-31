@@ -23,7 +23,7 @@ To cite ```CPC``` in publications and working papers, please use:
 
 Mehlhaff, Isaac D. "Measuring Political Polarization: The Cluster-Polarization Coefficient," working paper (January 2021), https://cefb4847-fd9c-4264-85bd-b53c1fb03099.filesusr.com/ugd/645f59_40a1e33b5d134bda92ab584a65cf41e5.pdf.
 
-For bibtex users:
+For BibTeX users:
 
 ```
 @unpublished{Mehlhaff2021,

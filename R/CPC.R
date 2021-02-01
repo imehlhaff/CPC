@@ -62,7 +62,8 @@
 
 CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
                 clusters = NULL, ...) {
-  input <- as.matrix(na.omit(data))
+  input <- data[colSums(!is.na(data)) > 0]
+  input <- as.matrix(na.omit(input))
   cluster <- NULL
 
   if(length(unique(input)) < k){
@@ -73,6 +74,7 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
   else{
     switch (type,
             hclust = {
+              input <- apply(input, 2, as.numeric)
               input_dist <- dist(input)
               output_hclust <- hclust(input_dist, ...)
               cut_hclust <- as.data.frame(cutree(output_hclust, k = k))
@@ -119,6 +121,7 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
               }
             },
             kmeans = {
+              input <- apply(input, 2, as.numeric)
               output_kmeans <- kmeans(x = input, centers = k, ...)
               cluster_kmeans <- as.data.frame(output_kmeans$cluster)
               colnames(cluster_kmeans) <- "cluster"
@@ -152,6 +155,7 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
               }
             },
             pam = {
+              input <- apply(input, 2, as.numeric)
               output_pam <- pam(x = input, k = k, ...)
               cluster_pam <- as.data.frame(output_pam$clustering)
               colnames(cluster_pam) <- "cluster"

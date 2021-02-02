@@ -54,7 +54,7 @@ CPC(data = data, k = 2, type = "kmeans")
 Further arguments to fine-tune the specified clustering function, such as which particular algorithm to use, can be passed directly to ```CPC()```. For example, the following call specifies the MacQueen algorithm instead of the default Hartigan-Wong algorithm:
 
 ```{r}
-CPC(data = data, k = 2, type = "kmeans", algorithm = "Lloyd")
+CPC(data = data, k = 2, type = "kmeans", algorithm = "MacQueen")
 ```
 
 In particular, if ```type = "kmeans"```, the algorithm is only guaranteed to converge to local optima, so using a large number of random starts is recommended. This can be specified with the ```nstart``` argument to ```kmeans()```, again passed directly to ```CPC()```.

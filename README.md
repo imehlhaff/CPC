@@ -1,4 +1,4 @@
-# CPC
+# CPC: Implementation of Cluster-Polarization Coefficient
 
 Implements cluster-polarization coefficient (CPC) for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, and manually imposed cluster membership. Calculates CPC and adjusted CPC. 
 

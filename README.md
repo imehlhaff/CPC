@@ -21,16 +21,17 @@ devtools::install_github("imehlhaff/CPC")
 
 To cite ```CPC``` in publications and working papers, please use:
 
-Mehlhaff, Isaac D. "Measuring Political Polarization: The Cluster-Polarization Coefficient," working paper (February 2021).
+Mehlhaff, Isaac D. "Measuring Polarization with Clustering Methods," working paper (February 2021).
 
 For BibTeX users:
 
 ```
-@unpublished{Mehlhaff2021,
-  title = {Measuring {{Political Polarization}}}: {{The Cluster}}-{{Polarization Coefficient}}},
+@unpublished{Mehlhaff2021b,
+  title = {Measuring {{Polarization}} with {{Clustering Methods}}},
   author = {Mehlhaff, Isaac D.},
-  date = {2021-02},
-  location = {{The University of North Carolina at Chapel Hill}}
+  year = {2021},
+  month = feb,
+  address = {{The University of North Carolina at Chapel Hill}}
 }
 ```
 

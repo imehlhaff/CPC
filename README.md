@@ -14,7 +14,7 @@ library(devtools)
 Then, run the following code:
 
 ```{r}
-devtools::install_github("imehlhaff/CPC@main")
+devtools::install_github("imehlhaff/CPC")
 ```
 
 ## Citation

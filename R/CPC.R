@@ -62,7 +62,7 @@
 
 CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
                 clusters = NULL, ...) {
-  input <- data[colSums(!is.na(as.matrix(data))) > 0]
+  input <- data[,colSums(!is.na(as.matrix(data))) > 0]
   input <- as.matrix(na.omit(input))
   cluster <- NULL
 

@@ -25,6 +25,9 @@ identifying cluster membership for each observation, to be passed to
 \item{type}{a character string giving the type of clustering method to be used.
 See Details.}
 
+\item{k}{the desired number of clusters. Required if \code{type = "hclust"},
+\code{type = "kmeans"}, or \code{type = "pam"}.}
+
 \item{epsilon}{radius of epsilon neighborhood. Required if \code{type = "dbscan"}.}
 
 \item{model}{a logical indicating whether clustering model output should be
@@ -80,7 +83,7 @@ data <- matrix(c(rnorm(50, 0, 1), rnorm(50, 5, 1)), ncol = 2, byrow = TRUE)
 clusters <- matrix(c(rep(1, 25), rep(2, 25)), ncol = 1)
 data <- cbind(data, clusters)
 
-CPC(data[,c(1:2)], 2, "kmeans")
-CPC(data, 2, "manual", cols = 1:2, clusters = 3)
+CPC(data[,c(1:2)], "kmeans", k = 2)
+CPC(data, "manual", cols = 1:2, clusters = 3)
 
 }

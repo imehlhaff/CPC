@@ -6,8 +6,9 @@
 \usage{
 CPC(
   data,
-  k,
   type,
+  k = NULL,
+  epsilon = NULL,
   model = FALSE,
   adjust = FALSE,
   cols = NULL,
@@ -21,10 +22,10 @@ CPC(
 identifying cluster membership for each observation, to be passed to
 \code{clusters} argument.}
 
-\item{k}{the desired number of clusters.}
-
 \item{type}{a character string giving the type of clustering method to be used.
 See Details.}
+
+\item{epsilon}{radius of epsilon neighborhood. Required if \code{type = "dbscan"}.}
 
 \item{model}{a logical indicating whether clustering model output should be
 returned. Defaults to \code{FALSE}.}
@@ -51,15 +52,17 @@ vector of length 1 giving the CPC (if \code{adjust = FALSE}) or adjusted CPC (if
 \description{
 Implements clustering algorithms and calculates cluster-polarization coefficient.
 Contains support for hierarchical clustering, k-means clustering, partitioning
-around medoids, and manual assignment of cluster membership.
+around medoids, density-based spatial clustering with noise, and manual assignment
+of cluster membership.
 }
 \details{
-\code{type} must take one of four values: \code{"hclust"} performs agglomerative
+\code{type} must take one of five values: \code{"hclust"} performs agglomerative
 hierarchical clustering via \code{\link{hclust}()}. \code{"kmeans"}
 performs k-means clustering via \code{\link{kmeans}()}. \code{"pam"}
-performs k-medoids clustering via \code{\link{pam}()}. \code{"manual"}
-indicates that no clustering is necessary and that the researcher has specified
-cluster assignments.
+performs k-medoids clustering via \code{\link{pam}()}. \code{"dbscan"} performs
+density-based clustering via \code{\link{dbscan}()}. \code{"manual"} indicates
+that no clustering is necessary and that the researcher has specified cluster
+assignments.
 
 For all clustering methods, additional arguments to fine-tune clustering
 performance, such as the specific algorithm to be used, should be passed to

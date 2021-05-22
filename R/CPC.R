@@ -2,15 +2,17 @@
 #'
 #' Implements clustering algorithms and calculates cluster-polarization coefficient.
 #' Contains support for hierarchical clustering, k-means clustering, partitioning
-#' around medoids, and manual assignment of cluster membership.
+#' around medoids, density-based spatial clustering with noise, and manual assignment
+#' of cluster membership.
 #'
 #' @details
-#' \code{type} must take one of four values: \code{"hclust"} performs agglomerative
+#' \code{type} must take one of five values: \code{"hclust"} performs agglomerative
 #' hierarchical clustering via \code{\link{hclust}()}. \code{"kmeans"}
 #' performs k-means clustering via \code{\link{kmeans}()}. \code{"pam"}
-#' performs k-medoids clustering via \code{\link{pam}()}. \code{"manual"}
-#' indicates that no clustering is necessary and that the researcher has specified
-#' cluster assignments.
+#' performs k-medoids clustering via \code{\link{pam}()}. \code{"dbscan"} performs
+#' density-based clustering via \code{\link{dbscan}()}. \code{"manual"} indicates
+#' that no clustering is necessary and that the researcher has specified cluster
+#' assignments.
 #'
 #' For all clustering methods, additional arguments to fine-tune clustering
 #' performance, such as the specific algorithm to be used, should be passed to
@@ -27,9 +29,11 @@
 #' \code{type = "manual"}, \code{data} must be a matrix containing a vector
 #' identifying cluster membership for each observation, to be passed to
 #' \code{clusters} argument.
-#' @param k the desired number of clusters.
 #' @param type a character string giving the type of clustering method to be used.
 #' See Details.
+#' @param k the desired number of clusters. Required if
+#' \code{type %in% c("hclust", "kmeans", "pam")}.
+#' @param epsilon radius of epsilon neighborhood. Required if \code{type = "dbscan"}.
 #' @param model a logical indicating whether clustering model output should be
 #' returned. Defaults to \code{FALSE}.
 #' @param adjust a logical indicating whether the adjusted CPC should be calculated.
@@ -60,11 +64,13 @@
 #'
 #' @export
 
-CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
-                clusters = NULL, ...) {
+CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FALSE,
+                cols = NULL, clusters = NULL, ...) {
   input <- data[,colSums(!is.na(as.matrix(data))) > 0]
   input <- as.matrix(na.omit(input))
   cluster <- NULL
+
+  k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)
 
   if(length(unique(input)) < k){
     warning("More clusters than unique data points; NAs generated")
@@ -73,6 +79,51 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
 
   else{
     switch (type,
+            dbscan = {
+              output_dbscan <- dbscan::dbscan(x = input, eps = epsilon)
+              new_dbscan <- cbind(input, unlist(output_dbscan$cluster))
+              new_dbscan <- subset(new_dbscan, new_dbscan[,ncol(new_dbscan)] != 0)
+
+              new_dbscan <- CPCdata.frame(data = new_dbscan,
+                                          cols = -ncol(new_dbscan),
+                                          clusters = ncol(new_dbscan))
+              data_dbscan <- new_dbscan[,-ncol(new_dbscan)]
+              WSS_dbscan <- c()
+
+              for (i in unique(new_dbscan$cluster)) {
+                data_temp <- subset(new_dbscan, cluster == i)
+                data_temp <- data_temp[,-ncol(new_dbscan)]
+                WSS <- SS(data_temp)
+                WSS_dbscan <- c(WSS_dbscan, WSS)
+              }
+
+              TSS_dbscan <- SS(data_dbscan)
+              TWSS_dbscan <- sum(WSS_dbscan)
+              BSS_dbscan <- TSS_dbscan - TWSS_dbscan
+              CPC <- BSS_dbscan/TSS_dbscan
+              CPC.adj <- 1 -
+                (TWSS_dbscan/TSS_dbscan)*(1/length(unique(new_dbscan$cluster)))
+
+              if(model){
+                list(data = input,
+                     WSS = WSS_dbscan,
+                     TWSS = TWSS_dbscan,
+                     BSS = BSS_dbscan,
+                     TSS = TSS_dbscan,
+                     CPC = CPC,
+                     CPC.adj = CPC.adj)
+              }
+
+              else{
+                if(adjust){
+                  CPC.adj
+                }
+
+                else{
+                  CPC
+                }
+              }
+            },
             hclust = {
               input <- apply(input, 2, as.numeric)
               input_dist <- dist(input)
@@ -156,7 +207,7 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
             },
             pam = {
               input <- apply(input, 2, as.numeric)
-              output_pam <- pam(x = input, k = k, ...)
+              output_pam <- cluster::pam(x = input, k = k, ...)
               cluster_pam <- as.data.frame(output_pam$clustering)
               colnames(cluster_pam) <- "cluster"
               new_pam <- cbind(input, cluster_pam)
@@ -206,7 +257,7 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
               data_manual <- input[,cols]
               WSS_manual <- c()
 
-              for (i in 1:k) {
+              for (i in unique(input$cluster)) {
                 data_temp <- subset(input, cluster == i)
                 data_temp <- data_temp[,cols]
                 WSS <- SS(data_temp)
@@ -217,7 +268,8 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
               CPC <- BSS_manual/TSS_manual
-              CPC.adj <- 1 - (TWSS_manual/TSS_manual)*(1/k)
+              CPC.adj <- 1 -
+                (TWSS_manual/TSS_manual)*(1/length(unique(input$cluster)))
 
               if(model){
                 list(data = input,
@@ -242,3 +294,4 @@ CPC <- function(data, k, type, model = FALSE, adjust = FALSE, cols = NULL,
     )
   }
 }
+

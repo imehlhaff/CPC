@@ -31,8 +31,8 @@
 #' \code{clusters} argument.
 #' @param type a character string giving the type of clustering method to be used.
 #' See Details.
-#' @param k the desired number of clusters. Required if
-#' \code{type %in% c("hclust", "kmeans", "pam")}.
+#' @param k the desired number of clusters. Required if \code{type = "hclust"},
+#' \code{type = "kmeans"}, or \code{type = "pam"}.
 #' @param epsilon radius of epsilon neighborhood. Required if \code{type = "dbscan"}.
 #' @param model a logical indicating whether clustering model output should be
 #' returned. Defaults to \code{FALSE}.
@@ -56,11 +56,12 @@
 #' clusters <- matrix(c(rep(1, 25), rep(2, 25)), ncol = 1)
 #' data <- cbind(data, clusters)
 #'
-#' CPC(data[,c(1:2)], 2, "kmeans")
-#' CPC(data, 2, "manual", cols = 1:2, clusters = 3)
+#' CPC(data[,c(1:2)], "kmeans", k = 2)
+#' CPC(data, "manual", cols = 1:2, clusters = 3)
 #'
 #' @import stats
 #' @import cluster
+#' @import dbscan
 #'
 #' @export
 
@@ -80,7 +81,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
   else{
     switch (type,
             dbscan = {
-              output_dbscan <- dbscan::dbscan(x = input, eps = epsilon)
+              output_dbscan <- dbscan(x = input, eps = epsilon, ...)
               new_dbscan <- cbind(input, unlist(output_dbscan$cluster))
               new_dbscan <- subset(new_dbscan, new_dbscan[,ncol(new_dbscan)] != 0)
 
@@ -207,7 +208,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
             },
             pam = {
               input <- apply(input, 2, as.numeric)
-              output_pam <- cluster::pam(x = input, k = k, ...)
+              output_pam <- pam(x = input, k = k, ...)
               cluster_pam <- as.data.frame(output_pam$clustering)
               colnames(cluster_pam) <- "cluster"
               new_pam <- cbind(input, cluster_pam)

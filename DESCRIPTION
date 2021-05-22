@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 1.1.2
+Version: 1.2.0
 Authors@R: 
     person(given = "Isaac D.",
            family = "Mehlhaff",
@@ -8,8 +8,9 @@ Authors@R:
            email = "isaac.mehlhaff@gmail.com")
 Description: Implements cluster-polarization coefficient for measuring distributional
 	polarization in single or multiple dimensions. Contains support for hierarchical
-	clustering, k-means, partitioning around medoids, and manually imposed cluster
-	membership. Calculates CPC and adjusted CPC. 
+	clustering, k-means, partitioning around medoids, density-based spatial clustering
+        with noise, and manually imposed cluster membership. Calculates CPC and adjusted
+        CPC. 
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -17,4 +18,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports: 
     stats,
-    cluster
+    cluster,
+    dbscan

@@ -67,8 +67,9 @@
 
 CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FALSE,
                 cols = NULL, clusters = NULL, ...) {
-  input <- data[,colSums(!is.na(as.matrix(data))) > 0]
-  input <- as.matrix(na.omit(input))
+  data <- as.matrix(data)
+  input <- data[colSums(!is.na(data)) > 0]
+  input <- matrix(na.omit(input), ncol = ncol(data))
   cluster <- NULL
 
   k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)
@@ -94,11 +95,11 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               for (i in unique(new_dbscan$cluster)) {
                 data_temp <- subset(new_dbscan, cluster == i)
                 data_temp <- data_temp[,-ncol(new_dbscan)]
-                WSS <- SS(data_temp)
+                WSS <- SS(as.matrix(data_temp))
                 WSS_dbscan <- c(WSS_dbscan, WSS)
               }
 
-              TSS_dbscan <- SS(data_dbscan)
+              TSS_dbscan <- SS(as.matrix(data_dbscan))
               TWSS_dbscan <- sum(WSS_dbscan)
               BSS_dbscan <- TSS_dbscan - TWSS_dbscan
               CPC <- BSS_dbscan/TSS_dbscan
@@ -106,7 +107,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 (TWSS_dbscan/TSS_dbscan)*(1/length(unique(new_dbscan$cluster)))
 
               if(model){
-                list(data = input,
+                list(cluster = output_dbscan$cluster,
+                     minPts = output_dbscan$minPts,
+                     data = input,
                      WSS = WSS_dbscan,
                      TWSS = TWSS_dbscan,
                      BSS = BSS_dbscan,

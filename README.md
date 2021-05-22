@@ -1,6 +1,7 @@
 # CPC: Implementation of Cluster-Polarization Coefficient
 
-Implements cluster-polarization coefficient (CPC) for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, and manually imposed cluster membership. Calculates CPC and adjusted CPC. 
+Implements cluster-polarization coefficient for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, density-based spatial clustering with noise, and manually imposed cluster membership. Calculates CPC and adjusted CPC. 
+
 
 ## Installation
 
@@ -21,7 +22,7 @@ devtools::install_github("imehlhaff/CPC")
 
 To cite ```CPC``` in publications and working papers, please use:
 
-Mehlhaff, Isaac D. "Measuring Polarization with Clustering Methods," working paper (February 2021).
+Mehlhaff, Isaac D. "Measuring Polarization with Clustering Methods," working paper (May 2021).
 
 For BibTeX users:
 
@@ -30,7 +31,7 @@ For BibTeX users:
   title = {Measuring {{Polarization}} with {{Clustering Methods}}},
   author = {Mehlhaff, Isaac D.},
   year = {2021},
-  month = feb,
+  month = may,
   address = {{The University of North Carolina at Chapel Hill}}
 }
 ```

@@ -264,11 +264,11 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               for (i in unique(input$cluster)) {
                 data_temp <- subset(input, cluster == i)
                 data_temp <- data_temp[,cols]
-                WSS <- SS(data_temp)
+                WSS <- SS(as.matrix(data_temp))
                 WSS_manual <- c(WSS_manual, WSS)
               }
 
-              TSS_manual <- SS(data_manual)
+              TSS_manual <- SS(as.matrix(data_manual))
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
               CPC <- BSS_manual/TSS_manual

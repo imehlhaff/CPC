@@ -103,8 +103,10 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TWSS_dbscan <- sum(WSS_dbscan)
               BSS_dbscan <- TSS_dbscan - TWSS_dbscan
               CPC <- BSS_dbscan/TSS_dbscan
-              CPC.adj <- 1 -
-                (TWSS_dbscan/TSS_dbscan)*(1/length(unique(new_dbscan$cluster)))
+              CPC.adj <- 1 - (TWSS_dbscan/TSS_dbscan)*
+                ((nrow(data_dbscan) - ncol(data_dbscan))/
+                   (nrow(data_dbscan) - ncol(data_dbscan)*
+                      length(unique(new_dbscan$cluster))))
 
               if(model){
                 list(cluster = output_dbscan$cluster,
@@ -146,7 +148,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TWSS_hclust <- sum(WSS_hclust)
               BSS_hclust <- TSS_hclust - TWSS_hclust
               CPC <- BSS_hclust/TSS_hclust
-              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*(1/k)
+              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*
+                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
 
               if(model){
                 list(merge = output_hclust$merge,
@@ -183,7 +186,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               new_kmeans <- cbind(input, cluster_kmeans)
 
               CPC <- output_kmeans$betweenss/output_kmeans$totss
-              CPC.adj <- 1 - (output_kmeans$tot.withinss/output_kmeans$totss)*(1/k)
+              CPC.adj <- 1 - (output_kmeans$tot.withinss/output_kmeans$totss)*
+                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
 
               if(model){
                 list(centers = output_kmeans$centers,
@@ -226,7 +230,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TWSS_pam <- sum(WSS_pam)
               BSS_pam <- TSS_pam - TWSS_pam
               CPC <- BSS_pam/TSS_pam
-              CPC.adj <- 1 - (TWSS_pam/TSS_pam)*(1/k)
+              CPC.adj <- 1 - (TWSS_pam/TSS_pam)*
+                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
 
               if(model){
                 list(medoids = output_pam$medoids,
@@ -272,8 +277,10 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
               CPC <- BSS_manual/TSS_manual
-              CPC.adj <- 1 -
-                (TWSS_manual/TSS_manual)*(1/length(unique(input$cluster)))
+              CPC.adj <- 1 - (TWSS_manual/TSS_manual)*
+                ((nrow(data_manual) - ncol(data_manual))/
+                   (nrow(data_manual) - ncol(data_manual)*
+                      length(unique(input$cluster))))
 
               if(model){
                 list(data = input,

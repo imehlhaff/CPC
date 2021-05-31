@@ -278,8 +278,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               BSS_manual <- TSS_manual - TWSS_manual
               CPC <- BSS_manual/TSS_manual
               CPC.adj <- 1 - (TWSS_manual/TSS_manual)*
-                ((nrow(data_manual) - ncol(data_manual))/
-                   (nrow(data_manual) - ncol(data_manual)*
+                ((nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual)))/
+                   (nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual))*
                       length(unique(input$cluster))))
 
               if(model){

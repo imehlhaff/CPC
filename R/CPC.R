@@ -104,8 +104,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               BSS_dbscan <- TSS_dbscan - TWSS_dbscan
               CPC <- BSS_dbscan/TSS_dbscan
               CPC.adj <- 1 - (TWSS_dbscan/TSS_dbscan)*
-                ((nrow(data_dbscan) - ncol(data_dbscan))/
-                   (nrow(data_dbscan) - ncol(data_dbscan)*
+                ((nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan)))/
+                   (nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan))*
                       length(unique(new_dbscan$cluster))))
 
               if(model){

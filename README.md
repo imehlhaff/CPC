@@ -27,7 +27,7 @@ Mehlhaff, Isaac D. "Measuring Polarization with Clustering Methods," working pap
 For BibTeX users:
 
 ```
-@unpublished{Mehlhaff2021b,
+@unpublished{Mehlhaff2021,
   title = {Measuring {{Polarization}} with {{Clustering Methods}}},
   author = {Mehlhaff, Isaac D.},
   year = {2021},

@@ -17,5 +17,5 @@
 #' @export
 
 SS <- function(data, ...) {
-  sum(as.matrix(dist(data)^2))/(2*nrow(data))
+  sum(as.matrix(Dist(data)^2))/(2*nrow(data))
 }

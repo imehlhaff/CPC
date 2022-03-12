@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.0.2
+Version: 2.1.0
 Authors@R: 
     person(given = "Isaac D.",
            family = "Mehlhaff",
@@ -19,4 +19,5 @@ RoxygenNote: 7.1.1
 Imports: 
     stats,
     cluster,
-    dbscan
+    dbscan,
+    Rfast

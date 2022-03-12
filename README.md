@@ -22,16 +22,16 @@ devtools::install_github("imehlhaff/CPC")
 
 To cite ```CPC``` in publications and working papers, please use:
 
-Mehlhaff, Isaac D. "Measuring Polarization with Clustering Methods," working paper (May 2021).
+Mehlhaff, Isaac D. "A Group-Based Approach to Measuring Polarization," working paper (March 2022).
 
 For BibTeX users:
 
 ```
 @unpublished{Mehlhaff2021,
-  title = {Measuring {{Polarization}} with {{Clustering Methods}}},
+  title = {A Group-Based Approach to Measuring {{Polarization}}},
   author = {Mehlhaff, Isaac D.},
-  year = {2021},
-  month = may,
+  year = {2022},
+  month = march,
   address = {{The University of North Carolina at Chapel Hill}}
 }
 ```

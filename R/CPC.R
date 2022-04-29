@@ -277,7 +277,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 WSS_manual <- c(WSS_manual, WSS)
               }
               
-              TSS_manual <- SS(as.matrix(as.numeric(data_manual)))
+              TSS_manual <- SS(as.matrix(data_manual))
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
               CPC <- BSS_manual/TSS_manual

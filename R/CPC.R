@@ -89,13 +89,13 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               new_dbscan <- CPCdata.frame(data = new_dbscan,
                                           cols = -ncol(new_dbscan),
                                           clusters = ncol(new_dbscan))
-              data_dbscan <- new_dbscan[,-ncol(new_dbscan)]
+              data_dbscan <- as.matrix(new_dbscan[,-ncol(new_dbscan)])
               data_dbscan <- apply(data_dbscan, 2, as.numeric)
               WSS_dbscan <- c()
               
               for (i in unique(new_dbscan$cluster)) {
                 data_temp <- new_dbscan[new_dbscan$cluster == i,]
-                data_temp <- data_temp[,-ncol(new_dbscan)]
+                data_temp <- as.matrix(data_temp[,-ncol(new_dbscan)])
                 data_temp <- apply(data_temp, 2, as.numeric)
                 WSS <- SS(as.matrix(data_temp))
                 WSS_dbscan <- c(WSS_dbscan, WSS)
@@ -265,13 +265,13 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
             },
             manual = {
               input <- CPCdata.frame(data = data, cols = cols, clusters = clusters)
-              data_manual <- input[,-which(colnames(input) == "cluster")]
+              data_manual <- as.matrix(input[,-which(colnames(input) == "cluster")])
               data_manual <- apply(data_manual, 2, as.numeric)
               WSS_manual <- c()
               
               for (i in unique(input$cluster)) {
                 data_temp <- input[input$cluster == i,]
-                data_temp <- data_temp[,-which(colnames(input) == "cluster")]
+                data_temp <- as.matrix(data_temp[,-which(colnames(input) == "cluster")])
                 data_temp <- apply(data_temp, 2, as.numeric)
                 WSS <- SS(as.matrix(data_temp))
                 WSS_manual <- c(WSS_manual, WSS)

@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.1.3
+Version: 2.1.4
 Authors@R: 
     person(given = "Isaac D.",
            family = "Mehlhaff",

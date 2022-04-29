@@ -20,9 +20,6 @@
 CPCdata.frame <- function(data, cols, clusters) {
   new_data <- as.data.frame(data[,cols])
   new_clusters <- as.data.frame(data[,clusters])
-  
-  colnames(new_data) <- "cols"
-  colnames(new_clusters) <- "cluster"
-  
+  colnames(new_clusters) <- "cluster"  
   cbind(new_data, new_clusters)
 }

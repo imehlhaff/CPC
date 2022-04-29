@@ -263,12 +263,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
             },
             manual = {
               input <- CPCdata.frame(data = data, cols = cols, clusters = clusters)
-              data_manual <- input[,cols]
+              data_manual <- input[,-which(colnames(input) == "cluster")]
               WSS_manual <- c()
 
               for (i in unique(input$cluster)) {
                 data_temp <- subset(input, cluster == i)
-                data_temp <- data_temp[,cols]
+                data_temp <- data_temp[,-which(colnames(input) == "cluster")]
                 WSS <- SS(as.matrix(data_temp))
                 WSS_manual <- c(WSS_manual, WSS)
               }

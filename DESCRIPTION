@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.1.5
+Version: 2.2.0
 Author: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
 Maintainer: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
 Description: Implements cluster-polarization coefficient for measuring distributional

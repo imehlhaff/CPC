@@ -1,11 +1,8 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
 Version: 2.1.5
-Authors@R: 
-    person(given = "Isaac D.",
-           family = "Mehlhaff",
-           role = c("aut", "cre"),
-           email = "isaac.mehlhaff@gmail.com")
+Author: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
+Maintainer: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
 Description: Implements cluster-polarization coefficient for measuring distributional
 	polarization in single or multiple dimensions. Contains support for hierarchical
 	clustering, k-means, partitioning around medoids, density-based spatial clustering

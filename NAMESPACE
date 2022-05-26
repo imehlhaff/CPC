@@ -2,8 +2,10 @@
 
 export(CPC)
 export(CPCdata.frame)
+export(Euclidean)
 export(SS)
+export(correlate)
+import(Rfast)
 import(cluster)
 import(dbscan)
 import(stats)
-import(Rfast)

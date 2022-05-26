@@ -13,6 +13,7 @@
 #' SS(data)
 #'
 #' @import stats
+#' @import Rfast
 #'
 #' @export
 

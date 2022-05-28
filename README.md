@@ -5,7 +5,14 @@ Implements cluster-polarization coefficient for measuring distributional polariz
 
 ## Installation
 
-To easily install this package in R, first ensure you have the latest version of ```devtools``` installed:
+There are two ways to easily install this package in R. To install the stable version released to CRAN, install as normal:
+
+```{r}
+install.packages("CPC")
+library(CPC)
+```
+
+To install the most recent development version, first ensure you have the latest version of ```devtools``` installed:
 
 ```{r}
 install.packages("devtools")
@@ -28,11 +35,11 @@ For BibTeX users:
 
 ```
 @unpublished{Mehlhaff2022,
-  title = {A Group-Based Approach to Measuring {{Polarization}}},
+  title = {A {{Group-Based Approach}} to {{Measuring Polarization}}},
   author = {Mehlhaff, Isaac D.},
-  year = {2022},
-  month = may,
-  address = {{The University of North Carolina at Chapel Hill}}
+  date = {2022-05},
+  location = {{The University of North Carolina at Chapel Hill}},
+  url = {https://imehlhaff.net/files/CPC_note.pdf}
 }
 ```
 

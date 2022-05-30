@@ -1,5 +1,9 @@
 # CPC: Implementation of Cluster-Polarization Coefficient
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 Implements cluster-polarization coefficient for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, density-based spatial clustering with noise, and manually imposed cluster membership. Calculates CPC and adjusted CPC.
 
 ## Installation

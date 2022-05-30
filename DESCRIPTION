@@ -15,3 +15,5 @@ RoxygenNote: 7.1.2
 URL: https://github.com/imehlhaff/CPC
 BugReports: https://github.com/imehlhaff/CPC/issues
 Imports: stats, cluster, dbscan, Rfast
+Suggests: 
+    covr

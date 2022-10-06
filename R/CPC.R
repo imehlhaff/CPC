@@ -69,7 +69,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 cols = NULL, clusters = NULL, ...) {
   data <- as.matrix(data)
   input <- data[colSums(!is.na(data)) > 0]
-  input <- matrix(na.omit(input), ncol = ncol(data))
+  input <- as.matrix(na.omit(input))
   cluster <- NULL
   
   k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)
@@ -264,7 +264,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               }
             },
             manual = {
-              input <- CPCdata.frame(data = data, cols = cols, clusters = clusters)
+              input <- na.omit(CPCdata.frame(data = data, cols = cols, clusters = clusters))
               data_manual <- as.matrix(input[,-which(colnames(input) == "cluster")])
               data_manual <- apply(data_manual, 2, as.numeric)
               WSS_manual <- c()

@@ -96,5 +96,5 @@ data <- cbind(data, clusters)
 ```CPC()``` can now be called, with ```type = "manual"``` and calls to the optional arguments ```cols``` and ```clusters``` denoting the columns containing data and cluster memberships, respectively:
 
 ```{r}
-CPC(data = data, k = 2, type = "manual", cols = 1:2, clusters = 3)
+CPC(data = data, type = "manual", cols = 1:2, clusters = 3)
 ```

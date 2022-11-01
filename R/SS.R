@@ -13,7 +13,7 @@
 #' SS(data)
 #'
 #' @import stats
-#' @import Rfast
+#' @importFrom Rfast Dist
 #'
 #' @export
 

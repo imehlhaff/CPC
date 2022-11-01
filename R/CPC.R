@@ -60,8 +60,8 @@
 #' CPC(data, "manual", cols = 1:2, clusters = 3)
 #'
 #' @import stats
-#' @import cluster
-#' @import dbscan
+#' @importFrom cluster pam
+#' @importFrom dbscan dbscan
 #'
 #' @export
 
@@ -71,14 +71,14 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
   input <- data[colSums(!is.na(data)) > 0]
   input <- as.matrix(na.omit(input))
   cluster <- NULL
-  
+
   k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)
-  
+
   if(length(unique(input)) < k){
     warning("More clusters than unique data points; NAs generated")
     return(NA)
   }
-  
+
   else{
     switch (type,
             dbscan = {
@@ -92,7 +92,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               data_dbscan <- as.matrix(new_dbscan[,-ncol(new_dbscan)])
               data_dbscan <- apply(data_dbscan, 2, as.numeric)
               WSS_dbscan <- c()
-              
+
               for (i in unique(new_dbscan$cluster)) {
                 data_temp <- new_dbscan[new_dbscan$cluster == i,]
                 data_temp <- as.matrix(data_temp[,-ncol(new_dbscan)])
@@ -100,7 +100,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 WSS <- SS(as.matrix(data_temp))
                 WSS_dbscan <- c(WSS_dbscan, WSS)
               }
-              
+
               TSS_dbscan <- SS(as.matrix(data_dbscan))
               TWSS_dbscan <- sum(WSS_dbscan)
               BSS_dbscan <- TSS_dbscan - TWSS_dbscan
@@ -109,7 +109,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 ((nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan)))/
                    (nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan))*
                       length(unique(new_dbscan$cluster))))
-              
+
               if(model){
                 list(cluster = output_dbscan$cluster,
                      minPts = output_dbscan$minPts,
@@ -121,12 +121,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      CPC = CPC,
                      CPC.adj = CPC.adj)
               }
-              
+
               else{
                 if(adjust){
                   CPC.adj
                 }
-                
+
                 else{
                   CPC
                 }
@@ -140,19 +140,19 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               colnames(cut_hclust) <- "cluster"
               new_hclust <- cbind(input, cut_hclust)
               WSS_hclust <- c()
-              
+
               for (i in 1:k) {
                 WSS <- SS(new_hclust[new_hclust$cluster == i,])
                 WSS_hclust <- c(WSS_hclust, WSS)
               }
-              
+
               TSS_hclust <- SS(input)
               TWSS_hclust <- sum(WSS_hclust)
               BSS_hclust <- TSS_hclust - TWSS_hclust
               CPC <- BSS_hclust/TSS_hclust
               CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*
                 ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
-              
+
               if(model){
                 list(merge = output_hclust$merge,
                      height = output_hclust$height,
@@ -169,12 +169,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      CPC = CPC,
                      CPC.adj = CPC.adj)
               }
-              
+
               else{
                 if(adjust){
                   CPC.adj
                 }
-                
+
                 else{
                   CPC
                 }
@@ -186,11 +186,11 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               cluster_kmeans <- as.data.frame(output_kmeans$cluster)
               colnames(cluster_kmeans) <- "cluster"
               new_kmeans <- cbind(input, cluster_kmeans)
-              
+
               CPC <- output_kmeans$betweenss/output_kmeans$totss
               CPC.adj <- 1 - (output_kmeans$tot.withinss/output_kmeans$totss)*
                 ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
-              
+
               if(model){
                 list(centers = output_kmeans$centers,
                      size = output_kmeans$size,
@@ -204,12 +204,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      CPC = CPC,
                      CPC.adj = CPC.adj)
               }
-              
+
               else{
                 if(adjust){
                   CPC.adj
                 }
-                
+
                 else{
                   CPC
                 }
@@ -222,19 +222,19 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               colnames(cluster_pam) <- "cluster"
               new_pam <- cbind(input, cluster_pam)
               WSS_pam <- c()
-              
+
               for (i in 1:k) {
                 WSS <- SS(new_pam[new_pam$cluster == i,])
                 WSS_pam <- c(WSS_pam, WSS)
               }
-              
+
               TSS_pam <- SS(input)
               TWSS_pam <- sum(WSS_pam)
               BSS_pam <- TSS_pam - TWSS_pam
               CPC <- BSS_pam/TSS_pam
               CPC.adj <- 1 - (TWSS_pam/TSS_pam)*
                 ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
-              
+
               if(model){
                 list(medoids = output_pam$medoids,
                      id.med = output_pam$id.med,
@@ -252,12 +252,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      CPC = CPC,
                      CPC.adj = CPC.adj)
               }
-              
+
               else{
                 if(adjust){
                   CPC.adj
                 }
-                
+
                 else{
                   CPC
                 }
@@ -268,7 +268,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               data_manual <- as.matrix(input[,-which(colnames(input) == "cluster")])
               data_manual <- apply(data_manual, 2, as.numeric)
               WSS_manual <- c()
-              
+
               for (i in unique(input$cluster)) {
                 data_temp <- input[input$cluster == i,]
                 data_temp <- as.matrix(data_temp[,-which(colnames(input) == "cluster")])
@@ -276,7 +276,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 WSS <- SS(as.matrix(data_temp))
                 WSS_manual <- c(WSS_manual, WSS)
               }
-              
+
               TSS_manual <- SS(as.matrix(data_manual))
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
@@ -285,7 +285,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 ((nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual)))/
                    (nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual))*
                       length(unique(input$cluster))))
-              
+
               if(model){
                 list(data = input,
                      WSS = WSS_manual,
@@ -295,12 +295,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      CPC = CPC,
                      CPC.adj = CPC.adj)
               }
-              
+
               else{
                 if(adjust){
                   CPC.adj
                 }
-                
+
                 else{
                   CPC
                 }

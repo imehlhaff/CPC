@@ -12,7 +12,7 @@ SS(data, ...)
 \item{...}{arguments passed to \code{\link{dist}()}.}
 }
 \value{
-a numeric vector of length 1.
+Returns a numeric vector of length 1.
 }
 \description{
 Calculates sums of squares for uni- or multi-dimensional numeric data using the

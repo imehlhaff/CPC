@@ -14,7 +14,7 @@ CPCdata.frame(data, cols, clusters)
 \item{clusters}{column in \code{data} giving cluster membership.}
 }
 \value{
-a data frame with dimensions identical to those of \code{data}.
+Returns a data frame with dimensions identical to those of \code{data}.
 }
 \description{
 Converts numeric matrix to data frame with necessary format for

@@ -7,7 +7,7 @@
 #' @param cols columns in \code{data} to be used for calculating \code{\link{CPC}()}.
 #' @param clusters column in \code{data} giving cluster membership.
 #'
-#' @return a data frame with dimensions identical to those of \code{data}.
+#' @return Returns a data frame with dimensions identical to those of \code{data}.
 #'
 #' @examples
 #' data <- matrix(c(rnorm(50, 0, 1), rnorm(50, 5, 1)), ncol = 2, byrow = TRUE)
@@ -20,6 +20,6 @@
 CPCdata.frame <- function(data, cols, clusters) {
   new_data <- as.data.frame(data[,cols])
   new_clusters <- as.data.frame(data[,clusters])
-  colnames(new_clusters) <- "cluster"  
+  colnames(new_clusters) <- "cluster"
   cbind(new_data, new_clusters)
 }

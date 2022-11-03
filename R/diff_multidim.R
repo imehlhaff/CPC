@@ -37,11 +37,11 @@ diff_multidim <- function(data, cols, clusters) {
     obs <- nrow(subset(input, clusters == i))
 
     if (obs > 1) {
-      means <- c(means, colMeans(eval(parse(text = name))))
+      means <- c(means, colMeans(eval(parse(text = name))[, -ncol(t(as.matrix(eval(parse(text = name)))))]))
     }
 
     else {
-      means <- c(means, colMeans(t(as.matrix(t(as.matrix(eval(parse(text = name))))))))
+      means <- c(means, colMeans(t(as.matrix(t(as.matrix(eval(parse(text = name))[, -ncol(t(as.matrix(eval(parse(text = name)))))]))))))
     }
   }
 

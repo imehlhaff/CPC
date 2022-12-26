@@ -46,9 +46,9 @@
 #' @param ... arguments passed to other functions.
 #'
 #' @return If \code{model = TRUE}, \code{CPC()} returns a list with components
-#' containing output from the specified clustering function, all sums of squares,
-#' CPC, and adjusted CPC. If \code{model = FALSE}, \code{CPC()} returns a numeric
-#' vector of length 1 giving the CPC (if \code{adjust = FALSE}) or adjusted CPC (if
+#' containing output from the specified clustering function, all sums of squares, the
+#' CPC, the adjusted CPC, and associated standard errors. If \code{model = FALSE}, \code{CPC()} returns
+#' a numeric vector of length 1 giving the CPC (if \code{adjust = FALSE}) or adjusted CPC (if
 #' \code{adjust = TRUE}).
 #'
 #' @examples

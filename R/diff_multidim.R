@@ -30,7 +30,7 @@ diff_multidim <- function(data, cols, clusters) {
   for (i in unique(input$cluster)) {
     name <- paste0("cluster_", i)
 
-    assign(name, apply(subset(input, cluster == i)[, -clusters], 2, as.numeric))
+    assign(name, apply(as.data.frame(subset(input, cluster == i)[, -ncol(input)]), 2, as.numeric))
 
     obs <- nrow(subset(input, cluster == i))
 

@@ -264,14 +264,14 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               }
             },
             manual = {
-              input <- na.omit(CPCdata.frame(data = data, cols = cols, clusters = clusters))
-              data_manual <- as.matrix(input[,-which(colnames(input) == "cluster")])
+              input <- CPCdata.frame(data = data, cols = cols, clusters = clusters)
+              data_manual <- as.matrix(input[, -ncol(input)])
               data_manual <- apply(data_manual, 2, as.numeric)
               WSS_manual <- c()
 
               for (i in unique(input$cluster)) {
                 data_temp <- input[input$cluster == i,]
-                data_temp <- as.matrix(data_temp[,-which(colnames(input) == "cluster")])
+                data_temp <- as.matrix(data_temp[, -ncol(input)])
                 data_temp <- apply(data_temp, 2, as.numeric)
                 WSS <- SS(as.matrix(data_temp))
                 WSS_manual <- c(WSS_manual, WSS)

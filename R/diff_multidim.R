@@ -23,9 +23,7 @@
 #' @export
 
 diff_multidim <- function(data, cols, clusters) {
-  input <- na.omit(as.matrix(data)[,c(cols, clusters)])
-  colnames(input)[ncol(input)] <- "clusters"
-  input <- as.data.frame(input)
+  input <- CPCdata.frame(data, cols, clusters)
 
   means <- c()
 

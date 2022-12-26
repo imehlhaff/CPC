@@ -69,7 +69,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 cols = NULL, clusters = NULL, ...) {
   data <- as.matrix(data)
   input <- data[colSums(!is.na(data)) > 0]
-  input <- as.matrix(na.omit(input))
+  input <- matrix(na.omit(input), ncol = ncol(data))
   cluster <- NULL
 
   k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)

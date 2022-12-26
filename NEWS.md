@@ -1,3 +1,13 @@
+# CPC 2.4.0
+
+Changes to diff_multidim function allow calculation of one-dimensional difference-in-means and use of column names in function arguments.
+
+Streamlines data processing pipeline in diff_multidim and workhorse CPC functions.
+
+Bug fixes to ensure preservation of multicolumn data structure in model-based CPC calculation.
+
+Adds automatic calculation of standard deviation of CPC estimates when model=TRUE.
+
 # CPC 2.3.0
 
 Bug fixes to improve handling of missing data in workhorse CPC function.

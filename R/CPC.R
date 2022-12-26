@@ -104,11 +104,13 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TSS_dbscan <- SS(as.matrix(data_dbscan))
               TWSS_dbscan <- sum(WSS_dbscan)
               BSS_dbscan <- TSS_dbscan - TWSS_dbscan
+              n_i <- nrow(as.matrix(data_dbscan))
+              n_j <- ncol(as.matrix(data_dbscan))
+              n_k <- length(unique(new_dbscan$cluster))
               CPC <- BSS_dbscan/TSS_dbscan
-              CPC.adj <- 1 - (TWSS_dbscan/TSS_dbscan)*
-                ((nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan)))/
-                   (nrow(as.matrix(data_dbscan)) - ncol(as.matrix(data_dbscan))*
-                      length(unique(new_dbscan$cluster))))
+              CPC_sd <- sqrt((2*(n_j*n_k - n_j)*(n_i - n_j*n_k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_dbscan/TSS_dbscan)*((n_i - n_j)/(n_i - n_j*n_k))
+              CPC.adj_sd <- sqrt((2*(n_j*n_k - n_j))/((n_i - n_j*n_k)*(n_i - n_j + 1)))
 
               if(model){
                 list(cluster = output_dbscan$cluster,
@@ -119,7 +121,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      BSS = BSS_dbscan,
                      TSS = TSS_dbscan,
                      CPC = CPC,
-                     CPC.adj = CPC.adj)
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
               }
 
               else{
@@ -149,9 +153,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TSS_hclust <- SS(input)
               TWSS_hclust <- sum(WSS_hclust)
               BSS_hclust <- TSS_hclust - TWSS_hclust
+              n_i <- nrow(input)
+              n_j <- ncol(input)
               CPC <- BSS_hclust/TSS_hclust
-              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*
-                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
+              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*((n_i - n_j)/(n_i - n_j*k))
+              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
 
               if(model){
                 list(merge = output_hclust$merge,
@@ -167,7 +174,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      BSS = BSS_hclust,
                      TSS = TSS_hclust,
                      CPC = CPC,
-                     CPC.adj = CPC.adj)
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
               }
 
               else{
@@ -187,9 +196,13 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               colnames(cluster_kmeans) <- "cluster"
               new_kmeans <- cbind(input, cluster_kmeans)
 
+              n_i <- nrow(input)
+              n_j <- ncol(input)
               CPC <- output_kmeans$betweenss/output_kmeans$totss
-              CPC.adj <- 1 - (output_kmeans$tot.withinss/output_kmeans$totss)*
-                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
+              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 -
+                (output_kmeans$tot.withinss/output_kmeans$totss)*((n_i - n_j)/(n_i - n_j*k))
+              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
 
               if(model){
                 list(centers = output_kmeans$centers,
@@ -202,7 +215,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      BSS = output_kmeans$betweenss,
                      TSS = output_kmeans$totss,
                      CPC = CPC,
-                     CPC.adj = CPC.adj)
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
               }
 
               else{
@@ -231,9 +246,12 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TSS_pam <- SS(input)
               TWSS_pam <- sum(WSS_pam)
               BSS_pam <- TSS_pam - TWSS_pam
+              n_i <- nrow(input)
+              n_j <- ncol(input)
               CPC <- BSS_pam/TSS_pam
-              CPC.adj <- 1 - (TWSS_pam/TSS_pam)*
-                ((nrow(input) - ncol(input))/(nrow(input) - ncol(input)*k))
+              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_pam/TSS_pam)*((n_i - n_j)/(n_i - n_j*k))
+              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
 
               if(model){
                 list(medoids = output_pam$medoids,
@@ -250,7 +268,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      BSS = BSS_hclust,
                      TSS = TSS_hclust,
                      CPC = CPC,
-                     CPC.adj = CPC.adj)
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
               }
 
               else{
@@ -280,11 +300,13 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TSS_manual <- SS(as.matrix(data_manual))
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
+              n_i <- nrow(input)
+              n_j <- ncol(input)
+              n_k <- length(unique(input$cluster))
               CPC <- BSS_manual/TSS_manual
-              CPC.adj <- 1 - (TWSS_manual/TSS_manual)*
-                ((nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual)))/
-                   (nrow(as.matrix(data_manual)) - ncol(as.matrix(data_manual))*
-                      length(unique(input$cluster))))
+              CPC_sd <- sqrt((2*(n_j*n_k - n_j)*(n_i - n_j*n_k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_manual/TSS_manual)*((n_i - n_j)/(n_i - n_j*n_k))
+              CPC.adj_sd <- sqrt((2*(n_j*n_k - n_j))/((n_i - n_j*n_k)*(n_i - n_j + 1)))
 
               if(model){
                 list(data = input,
@@ -293,7 +315,9 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      BSS = BSS_manual,
                      TSS = TSS_manual,
                      CPC = CPC,
-                     CPC.adj = CPC.adj)
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
               }
 
               else{

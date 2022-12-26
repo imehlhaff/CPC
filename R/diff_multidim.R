@@ -27,12 +27,12 @@ diff_multidim <- function(data, cols, clusters) {
 
   means <- c()
 
-  for (i in unique(input$clusters)) {
+  for (i in unique(input$cluster)) {
     name <- paste0("cluster_", i)
 
-    assign(name, apply(subset(input, clusters == i)[, -clusters], 2, as.numeric))
+    assign(name, apply(subset(input, cluster == i)[, -clusters], 2, as.numeric))
 
-    obs <- nrow(subset(input, clusters == i))
+    obs <- nrow(subset(input, cluster == i))
 
     if (obs > 1) {
       means <- c(means, colMeans(eval(parse(text = name))))

@@ -6,12 +6,12 @@
 #' of cluster membership.
 #'
 #' @details
-#' \code{type} must take one of five values:
-#' \code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()},
-#' \code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()},
-#' \code{"kmeans"}: k-means clustering with \code{\link{kmeans}()},
-#' \code{"pam"}: k-medoids clustering with \code{\link{pam}()},
-#' \code{"dbscan"}: density-based clustering with \code{\link{dbscan}()},
+#' \code{type} must take one of six values: \cr
+#' \code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()}, \cr
+#' \code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()}, \cr
+#' \code{"kmeans"}: k-means clustering with \code{\link{kmeans}()}, \cr
+#' \code{"pam"}: k-medoids clustering with \code{\link{pam}()}, \cr
+#' \code{"dbscan"}: density-based clustering with \code{\link{dbscan}()}, \cr
 #' \code{"manual"}: no clustering is necessary, researcher has specified cluster assignments.
 #'
 #' For all clustering methods, additional arguments to fine-tune clustering
@@ -32,7 +32,7 @@
 #' @param type a character string giving the type of clustering method to be used.
 #' See Details.
 #' @param k the desired number of clusters. Required if \code{type} is one of \code{"hclust"},
-#' \code{"diana}, \code{"kmeans"}, or \code{"pam"}.
+#' \code{"diana"}, \code{"kmeans"}, or \code{"pam"}.
 #' @param epsilon radius of epsilon neighborhood. Required if \code{type = "dbscan"}.
 #' @param model a logical indicating whether clustering model output should be
 #' returned. Defaults to \code{FALSE}.

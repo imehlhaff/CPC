@@ -25,8 +25,8 @@ identifying cluster membership for each observation, to be passed to
 \item{type}{a character string giving the type of clustering method to be used.
 See Details.}
 
-\item{k}{the desired number of clusters. Required if \code{type = "hclust"},
-\code{type = "kmeans"}, or \code{type = "pam"}.}
+\item{k}{the desired number of clusters. Required if \code{type} is one of \code{"hclust"},
+\code{"diana"}, \code{"kmeans"}, or \code{"pam"}.}
 
 \item{epsilon}{radius of epsilon neighborhood. Required if \code{type = "dbscan"}.}
 
@@ -47,9 +47,9 @@ observation. Only used if \code{type = "manual"}.}
 }
 \value{
 If \code{model = TRUE}, \code{CPC()} returns a list with components
-containing output from the specified clustering function, all sums of squares,
-CPC, and adjusted CPC. If \code{model = FALSE}, \code{CPC()} returns a numeric
-vector of length 1 giving the CPC (if \code{adjust = FALSE}) or adjusted CPC (if
+containing output from the specified clustering function, all sums of squares, the
+CPC, the adjusted CPC, and associated standard errors. If \code{model = FALSE}, \code{CPC()} returns
+a numeric vector of length 1 giving the CPC (if \code{adjust = FALSE}) or adjusted CPC (if
 \code{adjust = TRUE}).
 }
 \description{
@@ -59,13 +59,13 @@ around medoids, density-based spatial clustering with noise, and manual assignme
 of cluster membership.
 }
 \details{
-\code{type} must take one of five values: \code{"hclust"} performs agglomerative
-hierarchical clustering via \code{\link{hclust}()}. \code{"kmeans"}
-performs k-means clustering via \code{\link{kmeans}()}. \code{"pam"}
-performs k-medoids clustering via \code{\link{pam}()}. \code{"dbscan"} performs
-density-based clustering via \code{\link{dbscan}()}. \code{"manual"} indicates
-that no clustering is necessary and that the researcher has specified cluster
-assignments.
+\code{type} must take one of six values: \cr
+\code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()}, \cr
+\code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()}, \cr
+\code{"kmeans"}: k-means clustering with \code{\link{kmeans}()}, \cr
+\code{"pam"}: k-medoids clustering with \code{\link{pam}()}, \cr
+\code{"dbscan"}: density-based clustering with \code{\link{dbscan}()}, \cr
+\code{"manual"}: no clustering is necessary, researcher has specified cluster assignments.
 
 For all clustering methods, additional arguments to fine-tune clustering
 performance, such as the specific algorithm to be used, should be passed to

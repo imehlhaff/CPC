@@ -6,7 +6,7 @@
 #' of cluster membership.
 #'
 #' @details
-#' \code{type} must take one of five values:
+#' \code{type} must take one of six values:
 #' \code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()},
 #' \code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()},
 #' \code{"kmeans"}: k-means clustering with \code{\link{kmeans}()},

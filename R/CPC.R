@@ -6,13 +6,13 @@
 #' of cluster membership.
 #'
 #' @details
-#' \code{type} must take one of five values: \code{"hclust"} performs agglomerative
-#' hierarchical clustering via \code{\link{hclust}()}. \code{"kmeans"}
-#' performs k-means clustering via \code{\link{kmeans}()}. \code{"pam"}
-#' performs k-medoids clustering via \code{\link{pam}()}. \code{"dbscan"} performs
-#' density-based clustering via \code{\link{dbscan}()}. \code{"manual"} indicates
-#' that no clustering is necessary and that the researcher has specified cluster
-#' assignments.
+#' \code{type} must take one of five values:
+#' \code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()},
+#' \code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()},
+#' \code{"kmeans"}: k-means clustering with \code{\link{kmeans}()},
+#' \code{"pam"}: k-medoids clustering with \code{\link{pam}()},
+#' \code{"dbscan"}: density-based clustering with \code{\link{dbscan}()},
+#' \code{"manual"}: no clustering is necessary, researcher has specified cluster assignments.
 #'
 #' For all clustering methods, additional arguments to fine-tune clustering
 #' performance, such as the specific algorithm to be used, should be passed to
@@ -31,8 +31,8 @@
 #' \code{clusters} argument.
 #' @param type a character string giving the type of clustering method to be used.
 #' See Details.
-#' @param k the desired number of clusters. Required if \code{type = "hclust"},
-#' \code{type = "kmeans"}, or \code{type = "pam"}.
+#' @param k the desired number of clusters. Required if \code{type} is one of \code{"hclust"},
+#' \code{"diana}, \code{"kmeans"}, or \code{"pam"}.
 #' @param epsilon radius of epsilon neighborhood. Required if \code{type = "dbscan"}.
 #' @param model a logical indicating whether clustering model output should be
 #' returned. Defaults to \code{FALSE}.
@@ -60,9 +60,8 @@
 #' CPC(data, "manual", cols = 1:2, clusters = 3)
 #'
 #' @import stats
-#' @importFrom cluster pam
+#' @importFrom cluster pam diana
 #' @importFrom dbscan dbscan
-#'
 #' @export
 
 CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FALSE,
@@ -72,7 +71,7 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
   input <- matrix(na.omit(input), ncol = ncol(data))
   cluster <- NULL
 
-  k <- ifelse(type %in% c("kmeans", "pam", "hclust"), k, 0)
+  k <- ifelse(!type %in% c("dbscan", "manual"), k, 0)
 
   if(length(unique(input)) < k){
     warning("More clusters than unique data points; NAs generated")
@@ -189,6 +188,57 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 }
               }
             },
+            diana = {
+              input <- apply(input, 2, as.numeric)
+              input_dist <- dist(input)
+              output_diana <- diana(input_dist, ...)
+              cut_diana <- as.data.frame(cutree(output_diana, k = k))
+              colnames(cut_diana) <- "cluster"
+              new_diana <- cbind(input, cut_diana)
+              WSS_diana <- c()
+
+              for (i in 1:k) {
+                WSS <- SS(new_diana[new_diana$cluster == i,])
+                WSS_diana <- c(WSS_diana, WSS)
+              }
+
+              TSS_diana <- SS(input)
+              TWSS_diana <- sum(WSS_diana)
+              BSS_diana <- TSS_diana - TWSS_diana
+              n_i <- nrow(input)
+              n_j <- ncol(input)
+              CPC <- BSS_diana/TSS_diana
+              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_diana/TSS_diana)*((n_i - n_j)/(n_i - n_j*k))
+              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
+
+              if(model){
+                list(order = output_diana$order,
+                     height = output_diana$height,
+                     dc = output_diana$merge,
+                     diss = output_diana$diss,
+                     call = output_diana$call,
+                     data = new_diana,
+                     WSS = WSS_diana,
+                     TWSS = TWSS_diana,
+                     BSS = BSS_diana,
+                     TSS = TSS_diana,
+                     CPC = CPC,
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
+              }
+
+              else{
+                if(adjust){
+                  CPC.adj
+                }
+
+                else{
+                  CPC
+                }
+              }
+            },
             kmeans = {
               input <- apply(input, 2, as.numeric)
               output_kmeans <- kmeans(x = input, centers = k, ...)
@@ -263,6 +313,59 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                      diss = output_pam$diss,
                      call = output_pam$call,
                      data = new_pam,
+                     WSS = WSS_hclust,
+                     TWSS = TWSS_hclust,
+                     BSS = BSS_hclust,
+                     TSS = TSS_hclust,
+                     CPC = CPC,
+                     CPC_sd = CPC_sd,
+                     CPC.adj = CPC.adj,
+                     CPC.adj_sd = CPC.adj_sd)
+              }
+
+              else{
+                if(adjust){
+                  CPC.adj
+                }
+
+                else{
+                  CPC
+                }
+              }
+            },
+            hclust = {
+              input <- apply(input, 2, as.numeric)
+              input_dist <- dist(input)
+              output_hclust <- hclust(input_dist, ...)
+              cut_hclust <- as.data.frame(cutree(output_hclust, k = k))
+              colnames(cut_hclust) <- "cluster"
+              new_hclust <- cbind(input, cut_hclust)
+              WSS_hclust <- c()
+
+              for (i in 1:k) {
+                WSS <- SS(new_hclust[new_hclust$cluster == i,])
+                WSS_hclust <- c(WSS_hclust, WSS)
+              }
+
+              TSS_hclust <- SS(input)
+              TWSS_hclust <- sum(WSS_hclust)
+              BSS_hclust <- TSS_hclust - TWSS_hclust
+              n_i <- nrow(input)
+              n_j <- ncol(input)
+              CPC <- BSS_hclust/TSS_hclust
+              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
+              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*((n_i - n_j)/(n_i - n_j*k))
+              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
+
+              if(model){
+                list(merge = output_hclust$merge,
+                     height = output_hclust$height,
+                     order = output_hclust$order,
+                     labels = output_hclust$labels,
+                     method = output_hclust$method,
+                     call = output_hclust$call,
+                     dist.method = output_hclust$dist.method,
+                     data = new_hclust,
                      WSS = WSS_hclust,
                      TWSS = TWSS_hclust,
                      BSS = BSS_hclust,

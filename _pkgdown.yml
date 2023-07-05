@@ -1,4 +1,13 @@
 url: http://imehlhaff.net/CPC/
 template:
   bootstrap: 5
-
+authors:
+  Isaac Mehlhaff:
+    href: "http://imehlhaff.net"
+navbar:
+  structure:
+    left: [intro, reference, news]
+    right: [search, github]
+  components:
+    news:
+      text: Change Log

@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.5.2
+Version: 2.5.3
 Author: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
 Maintainer: Isaac Mehlhaff <isaac.mehlhaff@gmail.com>
 Description: Implements cluster-polarization coefficient for measuring distributional
@@ -15,3 +15,5 @@ RoxygenNote: 7.2.0
 URL: https://github.com/imehlhaff/CPC
 BugReports: https://github.com/imehlhaff/CPC/issues
 Imports: stats, cluster, dbscan, Rfast
+Suggests: 
+    covr

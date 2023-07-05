@@ -4,7 +4,7 @@
 [![R-CMD-check](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/CPC)](https://CRAN.R-project.org/package=CPC)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![Codecov test coverage](https://codecov.io/gh/imehlhaff/CPC/branch/master/graph/badge.svg)](https://app.codecov.io/gh/imehlhaff/CPC?branch=master)
+<!-- [![Codecov test coverage](https://codecov.io/gh/imehlhaff/CPC/branch/master/graph/badge.svg)](https://app.codecov.io/gh/imehlhaff/CPC?branch=master) -->
 <!-- badges: end -->
 
 Implements cluster-polarization coefficient for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, density-based spatial clustering with noise, and manually imposed cluster membership. Calculates CPC and adjusted CPC.

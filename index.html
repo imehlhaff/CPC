@@ -80,7 +80,6 @@
 </div>
 <!-- badges: start -->
 
-<p><a href="http://imehlhaff.net/CPC/"><img src="reference/figures/logo.png" align="right" height="139" alt="CPC website"></a></p>
 <p>Implements cluster-polarization coefficient for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, density-based spatial clustering with noise, and manually imposed cluster membership. Calculates CPC and adjusted CPC.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -93,20 +92,6 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span></code></pre>
 <p>Then, run the following code:</p>
 <pre><code><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"imehlhaff/CPC"</span><span class="op">)</span></span></code></pre>
-</div>
-<div class="section level2">
-<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
-</h2>
-<p>To cite <code>CPC</code> in publications and working papers, please use:</p>
-<p>Mehlhaff, Isaac D. “A Group-Based Approach to Measuring Polarization,” working paper (May 2022). <a href="https://imehlhaff.net/files/CPC_note.pdf" class="external-link uri">https://imehlhaff.net/files/CPC_note.pdf</a>.</p>
-<p>For BibTeX users:</p>
-<pre><code>@unpublished{Mehlhaff2022,
-  title = {A {{Group-Based Approach}} to {{Measuring Polarization}}},
-  author = {Mehlhaff, Isaac D.},
-  date = {2022-05},
-  location = {{The University of North Carolina at Chapel Hill}},
-  url = {https://imehlhaff.net/files/CPC_note.pdf}
-}</code></pre>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -136,6 +121,20 @@
 <p><code><a href="reference/CPC.html">CPC()</a></code> can now be called, with <code>type = "manual"</code> and calls to the optional arguments <code>cols</code> and <code>clusters</code> denoting the columns containing data and cluster memberships, respectively:</p>
 <pre><code><span><span class="fu"><a href="reference/CPC.html">CPC</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">data</span>, type <span class="op">=</span> <span class="st">"manual"</span>, cols <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, clusters <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre>
 </div>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>To cite <code>CPC</code> in publications and working papers, please use:</p>
+<p>Mehlhaff, Isaac D. “A Group-Based Approach to Measuring Polarization,” working paper (May 2022). <a href="https://imehlhaff.net/files/CPC_note.pdf" class="external-link uri">https://imehlhaff.net/files/CPC_note.pdf</a>.</p>
+<p>For BibTeX users:</p>
+<pre><code>@unpublished{Mehlhaff2022,
+  title = {A {{Group-Based Approach}} to {{Measuring Polarization}}},
+  author = {Mehlhaff, Isaac D.},
+  date = {2022-05},
+  location = {{The University of North Carolina at Chapel Hill}},
+  url = {https://imehlhaff.net/files/CPC_note.pdf}
+}</code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

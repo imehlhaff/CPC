@@ -1,6 +1,8 @@
 url: http://imehlhaff.net/CPC/
 template:
   bootstrap: 5
+  bslib:
+    primary: "#800000"
 authors:
   Isaac Mehlhaff:
     href: "http://imehlhaff.net"

@@ -3,7 +3,10 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/imehlhaff/CPC/actions/workflows/R-CMD-check.yaml)
 [![CRAN status](https://www.r-pkg.org/badges/version/CPC)](https://CRAN.R-project.org/package=CPC)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/CPC)](https://cran.rstudio.com/web/packages/CPC/index.html)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) -->
+[![License: CC0](https://img.shields.io/cran/l/CPC)](http://imehlhaff.net/CPC/LICENSE.html)
 <!-- [![Codecov test coverage](https://codecov.io/gh/imehlhaff/CPC/branch/master/graph/badge.svg)](https://app.codecov.io/gh/imehlhaff/CPC?branch=master) -->
 <!-- badges: end -->
 

@@ -4,8 +4,6 @@ template:
 authors:
   Isaac Mehlhaff:
     href: "http://imehlhaff.net"
-news:
-  title: Change Log
 navbar:
   structure:
     left: [intro, reference, news]

@@ -4,3 +4,11 @@ template:
 authors:
   Isaac Mehlhaff:
     href: "http://imehlhaff.net"
+navbar:
+  structure:
+    left: [intro, reference, news]
+    right: [search, github]
+  components:
+    news:
+      text: Change Log
+      href: http://imehlhaff.net/CPC/news/index.html

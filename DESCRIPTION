@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.5.4
+Version: 2.5.5
 Authors@R: person("Isaac", "Mehlhaff", email = "isaac.mehlhaff@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-5776-005X"))
 Description: Implements cluster-polarization coefficient for measuring distributional
 	polarization in single or multiple dimensions, as well as associated functions.

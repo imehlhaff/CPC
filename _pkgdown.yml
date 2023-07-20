@@ -8,9 +8,12 @@ authors:
     href: "http://imehlhaff.net"
 navbar:
   structure:
-    left: [intro, reference, news]
+    left: [intro, reference, news, polarcap]
     right: [search, github]
   components:
     news:
       text: Change Log
       href: http://imehlhaff.net/CPC/news/index.html
+    polarcap:
+      text: PolarCAP
+      href: http://imehlhaff.net/PolarCAP/

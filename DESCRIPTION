@@ -1,11 +1,12 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.5.5
+Version: 2.5.6
 Authors@R: person("Isaac", "Mehlhaff", email = "isaac.mehlhaff@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-5776-005X"))
 Description: Implements cluster-polarization coefficient for measuring distributional
 	polarization in single or multiple dimensions, as well as associated functions.
 	Contains support for hierarchical clustering, k-means, partitioning around medoids,
 	density-based spatial clustering with noise, and manually imposed cluster membership.
+	Mehlhaff (forthcoming) <https://imehlhaff.net/files/CPC_note.pdf>.
 License: CC0
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +15,3 @@ RoxygenNote: 7.2.0
 URL: http://imehlhaff.net/CPC/
 BugReports: https://github.com/imehlhaff/CPC/issues
 Imports: stats, cluster, dbscan, Rfast
-Suggests: covr

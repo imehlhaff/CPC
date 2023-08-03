@@ -1,3 +1,11 @@
+# CPC 2.5.6
+
+Implements more efficient data manipulation procedures in workhorse CPC function and makes data manipulation procedures uniform across functions.
+
+Adds support for divisive hierarchical clustering.
+
+Updates citation information to reflect publication.
+
 # CPC 2.4.0
 
 Changes to diff_multidim function allow calculation of one-dimensional difference-in-means and use of column names in function arguments.

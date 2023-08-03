@@ -30,9 +30,9 @@ diff_multidim <- function(data, cols, clusters) {
   for (i in unique(input$cluster)) {
     name <- paste0("cluster_", i)
 
-    assign(name, apply(as.data.frame(subset(input, cluster == i)[, -ncol(input)]), 2, as.numeric))
+    assign(name, apply(as.data.frame(input[input$cluster == i, -ncol(input)]), 2, as.numeric))
 
-    obs <- nrow(subset(input, cluster == i))
+    obs <- nrow(input[input$cluster == i,])
 
     if (obs > 1) {
       means <- c(means, colMeans(eval(parse(text = name))))

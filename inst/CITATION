@@ -1,7 +1,5 @@
-citHeader("To cite CPC in publications use:")
-
-citEntry(
-  entry    = "Article",
+bibentry(
+  bibtype  = "Article",
   title    = "A Group-Based Approach to Measuring Polarization",
   author   = "Isaac D. Mehlhaff",
   journal  = "American Political Science Review",
@@ -9,8 +7,5 @@ citEntry(
   volume   = NA,
   number   = NA,
   pages    = NA,
-  url      = NA,
-  textVersion = paste(
-
-  )
+  doi      = NA
 )

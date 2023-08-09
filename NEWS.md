@@ -1,6 +1,8 @@
 # CPC 2.5.6
 
-Implements more efficient data manipulation procedures in workhorse CPC function and makes data manipulation procedures uniform across functions.
+Implements more efficient data manipulation procedures in workhorse CPC function.
+
+Makes data manipulation procedures uniform across functions.
 
 Adds support for divisive hierarchical clustering.
 

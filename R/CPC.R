@@ -333,59 +333,6 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
                 }
               }
             },
-            hclust = {
-              input <- apply(input, 2, as.numeric)
-              input_dist <- dist(input)
-              output_hclust <- hclust(input_dist, ...)
-              cut_hclust <- as.data.frame(cutree(output_hclust, k = k))
-              colnames(cut_hclust) <- "cluster"
-              new_hclust <- cbind(input, cut_hclust)
-              WSS_hclust <- c()
-
-              for (i in 1:k) {
-                WSS <- SS(new_hclust[new_hclust$cluster == i,])
-                WSS_hclust <- c(WSS_hclust, WSS)
-              }
-
-              TSS_hclust <- SS(input)
-              TWSS_hclust <- sum(WSS_hclust)
-              BSS_hclust <- TSS_hclust - TWSS_hclust
-              n_i <- nrow(input)
-              n_j <- ncol(input)
-              CPC <- BSS_hclust/TSS_hclust
-              CPC_sd <- sqrt((2*(n_j*k - n_j)*(n_i - n_j*k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))
-              CPC.adj <- 1 - (TWSS_hclust/TSS_hclust)*((n_i - n_j)/(n_i - n_j*k))
-              CPC.adj_sd <- sqrt((2*(n_j*k - n_j))/((n_i - n_j*k)*(n_i - n_j + 1)))
-
-              if(model){
-                list(merge = output_hclust$merge,
-                     height = output_hclust$height,
-                     order = output_hclust$order,
-                     labels = output_hclust$labels,
-                     method = output_hclust$method,
-                     call = output_hclust$call,
-                     dist.method = output_hclust$dist.method,
-                     data = new_hclust,
-                     WSS = WSS_hclust,
-                     TWSS = TWSS_hclust,
-                     BSS = BSS_hclust,
-                     TSS = TSS_hclust,
-                     CPC = CPC,
-                     CPC_sd = CPC_sd,
-                     CPC.adj = CPC.adj,
-                     CPC.adj_sd = CPC.adj_sd)
-              }
-
-              else{
-                if(adjust){
-                  CPC.adj
-                }
-
-                else{
-                  CPC
-                }
-              }
-            },
             manual = {
               input <- CPCdata.frame(data = data, cols = cols, clusters = clusters)
               data_manual <- as.matrix(input[, -ncol(input)])
@@ -403,8 +350,8 @@ CPC <- function(data, type, k = NULL, epsilon = NULL, model = FALSE, adjust = FA
               TSS_manual <- SS(as.matrix(data_manual))
               TWSS_manual <- sum(WSS_manual)
               BSS_manual <- TSS_manual - TWSS_manual
-              n_i <- nrow(input)
-              n_j <- ncol(input)
+              n_i <- nrow(data_manual)
+              n_j <- ncol(data_manual)
               n_k <- length(unique(input$cluster))
               CPC <- BSS_manual/TSS_manual
               CPC_sd <- sqrt((2*(n_j*n_k - n_j)*(n_i - n_j*n_k))/(((n_i - n_j)^2)*(n_i - n_j + 1)))

@@ -1,3 +1,11 @@
+# CPC 2.5.7
+
+Fixes bug leading to incorrect degrees of freedom and standard errors in some cases.
+
+Removes redundant code in CPC function.
+
+Updates citation.
+
 # CPC 2.5.6
 
 Implements more efficient data manipulation procedures in workhorse CPC function.

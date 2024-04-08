@@ -4,4 +4,4 @@
 
 ## Resubmission
 
-This is a new version of the package. It implements more efficient data manipulation procedures within the main CPC function, adds support for divisive hierarchical clustering, and updates documentation and citation information. See also NEWS.md.
+This is a new version of the package. It fixes a bug in the main function that could lead to inaccurate results, as well as removing redundant code. See also NEWS.md.

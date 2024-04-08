@@ -7,5 +7,5 @@ bibentry(
   volume   = NA,
   number   = NA,
   pages    = NA,
-  doi      = 10.1017/S0003055423001041
+  doi      = "10.1017/S0003055423001041"
 )

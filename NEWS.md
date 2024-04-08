@@ -1,4 +1,4 @@
-# CPC 2.5.7
+# CPC 2.6.0
 
 Fixes bug leading to incorrect degrees of freedom and standard errors in some cases.
 

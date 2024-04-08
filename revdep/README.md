@@ -10,16 +10,16 @@
 |collate  |en_US.UTF-8                                                                                |
 |ctype    |en_US.UTF-8                                                                                |
 |tz       |America/Chicago                                                                            |
-|date     |2023-08-02                                                                                 |
-|rstudio  |2023.06.0+421 Mountain Hydrangea (desktop)                                                 |
+|date     |2024-04-07                                                                                 |
+|rstudio  |2023.12.0+369 Ocean Storm (desktop)                                                        |
 |pandoc   |3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown) |
 
 # Dependencies
 
-|package |old   |new    |Δ  |
-|:-------|:-----|:------|:--|
-|CPC     |2.3.0 |2.5.6  |*  |
-|Rcpp    |NA    |1.0.11 |*  |
+|package       |old   |new        |Δ  |
+|:-------------|:-----|:----------|:--|
+|CPC           |2.5.6 |2.5.7      |*  |
+|RcppArmadillo |NA    |0.12.8.1.0 |*  |
 
 # Revdeps
 

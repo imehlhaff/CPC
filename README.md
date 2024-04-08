@@ -6,11 +6,11 @@
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/CPC)](https://cran.r-project.org/package=CPC)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.290683.svg)](https://doi.org/10.5281/zenodo.290683) -->
-[![License: CC0](https://img.shields.io/cran/l/CPC)](http://imehlhaff.net/CPC/LICENSE.html)
+[![License: CC0](https://img.shields.io/cran/l/CPC)](https://imehlhaff.net/CPC/LICENSE.html)
 <!-- [![Codecov test coverage](https://codecov.io/gh/imehlhaff/CPC/branch/master/graph/badge.svg)](https://app.codecov.io/gh/imehlhaff/CPC?branch=master) -->
 <!-- badges: end -->
 
-<a href="http://imehlhaff.net/CPC/"><img src="man/figures/logo.png" align="right" height="139" alt="CPC website" /></a>
+<a href="https://imehlhaff.net/CPC/"><img src="man/figures/logo.png" align="right" height="139" alt="CPC website" /></a>
 
 Implements cluster-polarization coefficient for measuring distributional polarization in single or multiple dimensions. Contains support for hierarchical clustering, k-means, partitioning around medoids, density-based spatial clustering with noise, and manually imposed cluster membership. Calculates CPC and adjusted CPC.
 

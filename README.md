@@ -45,12 +45,16 @@ Mehlhaff, Isaac D. "A Group-Based Approach to Measuring Polarization," American 
 For BibTeX users:
 
 ```
-@article{Mehlhaffforthcoming,
+@article{Mehlhaff2024,
   title = {A {{Group-Based Approach}} to {{Measuring Polarization}}},
   author = {Mehlhaff, Isaac D.},
-  year = {forthcoming},
-  journaltitle = {American Political Science Review},
-  url = {https://doi.org/10.1017/S0003055423001041}
+  year = {2024},
+  month = aug,
+  journal = {American Political Science Review},
+  volume = {118},
+  number = {3},
+  pages = {1518--1526},
+  doi = {https://doi.org/10.1017/S0003055423001041}
 }
 ```
 

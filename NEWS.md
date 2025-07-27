@@ -1,3 +1,9 @@
+# CPC 2.6.1
+
+Adds package anchors to links, per new CRAN guidelines.
+
+Updates citation.
+
 # CPC 2.6.0
 
 Fixes bug leading to incorrect degrees of freedom and standard errors in some cases.

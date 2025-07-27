@@ -4,4 +4,4 @@
 
 ## Resubmission
 
-This is a new version of the package. It fixes a bug in the main function that could lead to inaccurate results, as well as removing redundant code. See also NEWS.md.
+This is a new version of the package. It adds package anchors to links to comply with new CRAN guidelines, as well as updates the citation information. See also NEWS.md.

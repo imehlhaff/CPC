@@ -61,10 +61,10 @@ of cluster membership.
 \details{
 \code{type} must take one of six values: \cr
 \code{"hclust"}: agglomerative hierarchical clustering with \code{\link{hclust}()}, \cr
-\code{"diana"}: divisive hierarchical clustering with \code{\link{diana}()}, \cr
+\code{"diana"}: divisive hierarchical clustering with \code{\link[cluster]{diana}()}, \cr
 \code{"kmeans"}: k-means clustering with \code{\link{kmeans}()}, \cr
-\code{"pam"}: k-medoids clustering with \code{\link{pam}()}, \cr
-\code{"dbscan"}: density-based clustering with \code{\link{dbscan}()}, \cr
+\code{"pam"}: k-medoids clustering with \code{\link[cluster]{pam}()}, \cr
+\code{"dbscan"}: density-based clustering with \code{\link[dbscan]{dbscan}()}, \cr
 \code{"manual"}: no clustering is necessary, researcher has specified cluster assignments.
 
 For all clustering methods, additional arguments to fine-tune clustering

@@ -1,4 +1,4 @@
-# CPC 2.6.1
+# CPC 2.6.2
 
 Adds package anchors to links, per new CRAN guidelines.
 

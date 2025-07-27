@@ -1,6 +1,6 @@
 Package: CPC
 Title: Implementation of Cluster-Polarization Coefficient
-Version: 2.6.1
+Version: 2.6.2
 Authors@R: person("Isaac", "Mehlhaff", email = "isaac.mehlhaff@gmail.com", role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-5776-005X"))
 Description: Implements cluster-polarization coefficient for measuring distributional
 	polarization in single or multiple dimensions, as well as associated functions.
@@ -11,7 +11,7 @@ License: CC0
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.3.2
 URL: https://imehlhaff.net/CPC/
 BugReports: https://github.com/imehlhaff/CPC/issues
 Imports: stats, cluster, dbscan, Rfast

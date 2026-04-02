@@ -40,7 +40,7 @@ devtools::install_github("imehlhaff/CPC")
 
 To cite ```CPC``` in publications and working papers, please use:
 
-Mehlhaff, Isaac D. "A Group-Based Approach to Measuring Polarization," American Political Science Review (forthcoming).
+Mehlhaff, Isaac D. "A Group-Based Approach to Measuring Polarization," American Political Science Review (2024).
 
 For BibTeX users:
 
